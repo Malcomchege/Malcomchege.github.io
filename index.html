@@ -136,57 +136,103 @@
         /* Work Section Styles */
         .work-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr); /* Exactly 2 columns */
+            gap: 50px; /* Increased gap from 25px */
+        }
+
+        /* Tombstone icon for defunct companies */
+        .defunct-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+
+        .defunct-indicator svg {
+            width: 14px;
+            height: 14px;
+            fill: #aaaaaa;
         }
 
         .work-card {
             background-color: #1e1e1e; /* Slightly lighter dark shade for cards */
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease; /* Added border-radius to transition */
             display: flex;
             flex-direction: column;
             height: 100%; /* Ensure all cards have equal height */
+            position: relative; /* Needed for absolute positioning of children */
         }
 
-        .work-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        /* Update this rule to use :has() */
+        .work-card:has(.shoutout-tag):hover {
+            border-top-right-radius: 0;
         }
 
-        .work-card h3 { /* Company Name */
-            font-size: 1.4rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: #ffffff;
+        /* Shoutout tag styling */
+        .shoutout-tag {
+            position: absolute;
+            right: 0; /* Align to the right edge */
+            top: 0; /* Align to the top edge */
+            height: fit-content; /* Make tag full height of card */
+            background-color: #1e1e1e; /* Match card background */
+            color: #e0e0e0;
+            padding: 15px 8px; /* Adjust padding for vertical layout */
+            border-radius: 0 8px 8px 0; /* Round outer corners */
+            border: none;
+            font-size: 0.8rem; /* Slightly smaller font */
+            writing-mode: vertical-rl; /* Make text vertical (top to bottom) */
+            text-orientation: mixed; /* Keep characters upright */
+            text-align: center; /* Center text within the tag */
+            display: flex; /* Use flexbox for centering */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+            z-index: -1; /* Behind card content */
+            transform: translateX(0); /* Start positioned at the right edge, behind content */
+            transition: transform 0.3s ease; /* Add transition for sliding */
         }
 
-        .work-card h4 { /* Position */
-            font-size: 1rem;
-            font-weight: 300;
-            color: #bbbbbb;
-            margin-bottom: 15px;
+        .work-card:hover .shoutout-tag {
+            transform: translateX(100%); /* Slide tag OUT to the right on hover */
         }
 
-        .work-card p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 15px;
-            color: #cccccc;
+        /* Add this rule to keep the tag out when hovered directly */
+        .shoutout-tag:hover {
+            transform: translateX(100%);
+        }
+
+        .shoutout-tag a {
+            color: #b388ff; /* Purple color for the name */
+            font-weight: 600;
+            display: block; /* Ensure link takes up space */
+            margin: 5px 0; /* Add some vertical margin around the link */
         }
         
         .work-card .card-content {
             flex-grow: 1; /* Take up available space */
+            position: relative; /* Needed for z-index */
+            z-index: 1; /* Above the tag */
+            background-color: #1e1e1e; /* Match card background to hide tag */
         }
 
-        .work-card a {
+        .work-card > a[target="_blank"] { /* Target the bottom link specifically */
             color: #4dabf7; /* Link color */
             text-decoration: none;
             font-weight: 500;
             margin-top: auto; /* Push link to bottom */
             display: inline-block; /* Gives the link proper dimensions */
+            position: relative; /* Needed for z-index */
+            z-index: 1; /* Above the tag */
+            background-color: #1e1e1e; /* Match card background to hide tag */
+            padding: 5px 0; /* Add slight padding to prevent text overlap if needed */
+            margin-left: -5px; /* Counteract potential padding shift */
+            padding-left: 5px; /* Add padding */
         }
 
         .work-card a:hover {
@@ -232,6 +278,9 @@
             <h2>Work</h2>
             <div class="work-container">
                 <div class="work-card">
+                    <div class="shoutout-tag">
+                        shoutout to <a href="https://www.instagram.com/trevor.kirucha/" target="_blank" rel="noopener noreferrer">Trevor Kirucha</a>
+                    </div>
                     <div class="card-content">
                         <h3>
                             <img src="kenyaawaits-logo.svg" alt="Kenya Awaits Logo" style="height: 1.4rem; vertical-align: middle; margin-right: 8px;">
@@ -260,6 +309,26 @@
                         </p>
                     </div>
                     <a href="https://krfarm.co.ke" target="_blank" rel="noopener noreferrer">krfarm.co.ke</a>
+                </div>
+                
+                <div class="work-card">
+                    <div class="shoutout-tag">
+                        shoutout to <a href="https://www.instagram.com/binyam04/" target="_blank" rel="noopener noreferrer">Binyam Zerihun</a>
+                    </div>
+                    <div class="card-content">
+                        <h3>
+                            <img src="lopeve-logo.svg" alt="Lopeve Logo" style="height: 1.4rem; vertical-align: middle; margin-right: 8px;">
+                            Lopeve
+                            <span class="defunct-indicator" style="margin-left: 10px; margin-top: 0; font-size: 0.85rem; vertical-align: middle;">
+                                🪦 Shutdown: 22-Feb-2024
+                            </span>
+                        </h3>
+                        <h4>CEO</h4>
+                        <p>
+                            Lopeve tackled the challenge of student disconnection in Canadian universities by fostering meaningful connections through shared interests and experiences. Our platform enabled students to connect through thoughtfully designed questions and curated events, helping them build relationships beyond academic contexts and enhancing their university experience.
+                        </p>
+                    </div>
+                    <a href="https://www.instagram.com/lopevehq/" target="_blank" rel="noopener noreferrer">instagram.com/lopevehq</a>
                 </div>
             </div>
         </section>
