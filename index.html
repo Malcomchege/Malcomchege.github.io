@@ -14,11 +14,11 @@
         }
         
         body {
-            background-color: #f8f8f8;
-            color: #333;
+            background-color: #000000; /* Completely black background */
+            color: #e0e0e0; /* Light text */
             line-height: 1.6;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Keep this */
         }
         
         /* Intro Animation */
@@ -28,35 +28,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: transparent;
-            display: flex;
+            background-color: #000; /* Ensure overlay background is black */
+            display: flex; /* Re-add flex for panels */
             z-index: 100;
+            overflow: hidden; /* Keep hidden */
         }
         
         .panel {
             flex: 1;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            transition: transform 1.2s ease-in-out;
-            background-color: #000;
+            transition: transform 1.2s ease-in-out; /* Only transition transform */
+            background-color: #000; /* Keep panels black */
+            position: relative; /* Needed for border positioning */
+            display: flex; /* Add flex to align content */
+            align-items: center; /* Vertically center content */
         }
         
         .left-panel {
-            justify-content: flex-end;
+            border-right: 1px solid white; /* Keep border */
+            justify-content: flex-end; /* Align content (name) to the right */
         }
         
         .right-panel {
-            justify-content: flex-start;
+            border-left: 1px solid white; /* Keep border */
+            justify-content: flex-start; /* Align content (name) to the left */
         }
-        
+
         .panel-content {
             color: white;
             font-size: 3rem;
             font-weight: 200;
-            padding: 0 20px;
+            padding: 0 20px; /* Add padding */
+            white-space: nowrap; /* Prevent name wrapping */
         }
         
         .slide-left {
@@ -73,6 +77,8 @@
             margin: 0 auto;
             padding: 20px;
             opacity: 1; /* Content visible from start */
+            position: relative; /* Ensure content is potentially layerable if needed */
+            z-index: 1; /* Below intro overlay */
         }
         
         header {
@@ -84,6 +90,7 @@
             font-size: 3rem;
             font-weight: 300;
             margin-bottom: 10px;
+            color: #ffffff; /* Brighter white for main heading */
         }
         
         section {
@@ -93,60 +100,75 @@
         h2 {
             font-size: 1.8rem;
             font-weight: 400;
-            margin-bottom: 20px;
+            margin-bottom: 30px; /* Increased margin */
             padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #444; /* Darker border */
+            color: #f5f5f5; /* Slightly off-white */
         }
-        
-        .bio {
-            font-size: 1.1rem;
-            line-height: 1.8;
+
+        /* Work Section Styles */
+        .work-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 25px;
         }
-        
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+
+        .work-card {
+            background-color: #1e1e1e; /* Slightly lighter dark shade for cards */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .skill {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+
+        .work-card h3 { /* Company Name */
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #ffffff;
         }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
+
+        .work-card h4 { /* Position */
+            font-size: 1rem;
+            font-weight: 300;
+            color: #bbbbbb;
+            margin-bottom: 15px;
+        }
+
+        .work-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .work-card a {
+            color: #4dabf7; /* Link color */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .work-card a:hover {
+            text-decoration: underline;
         }
         
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .panel-content {
-                font-size: 2rem;
+                font-size: 2rem; /* Adjust name size */
             }
             
             h1 {
                 font-size: 2.2rem;
             }
-            
-            .skills-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .skill {
-                text-align: center;
+
+            .work-container {
+                 grid-template-columns: 1fr; /* Stack cards on smaller screens */
             }
         }
     </style>
@@ -155,10 +177,10 @@
     <!-- Intro Animation -->
     <div class="intro-overlay">
         <div class="panel left-panel">
-            <div class="panel-content">Malcom</div>
+            <div class="panel-content">Malcom</div> <!-- Name part in left panel -->
         </div>
         <div class="panel right-panel">
-            <div class="panel-content">Chege</div>
+            <div class="panel-content">Chege</div> <!-- Name part in right panel -->
         </div>
     </div>
     
@@ -169,41 +191,34 @@
         </header>
         
         <section>
-            <h2>About</h2>
-            <p class="bio">
-                Malcom Chege is the General Manager at KR Farm, a flower farm based in Kenya. 
-                He also runs a startup called Kenya Awaits, which helps foreigners import products 
-                from Kenya such as flowers, fruits, and maize flour.
-            </p>
-        </section>
-        
-        <section>
-            <h2>Skills</h2>
-            <div class="skills-container">
-                <div class="skill">Operations</div>
-                <div class="skill">Logistics</div>
-                <div class="skill">International Trade</div>
-                <div class="skill">Startup Management</div>
-            </div>
-        </section>
-        
-        <section>
-            <h2>Contact</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span class="icon">📧</span>
-                    <span>malcom@kenyaawaits.com</span>
+            <h2>Work</h2>
+            <div class="work-container">
+                <div class="work-card">
+                    <h3>KR Farm</h3>
+                    <h4>General Manager</h4>
+                    <p>
+                        KR Farm, founded in 2022, sustainably cultivates and exports high-quality Kenyan flowers globally. We are committed to environmental stewardship, community well-being, responsible farming practices, and sharing Kenya's natural beauty worldwide.
+                    </p>
+                    <p>
+                        As GM, I lead my team in upholding rigorous standards for sustainability, product quality, and efficient communication, focusing on responsible farming, meticulous quality control, and innovation to exceed client expectations.
+                    </p>
+                    <a href="https://krfarm.co.ke" target="_blank" rel="noopener noreferrer">krfarm.co.ke</a>
                 </div>
-                <div class="contact-item">
-                    <span class="icon">🔗</span>
-                    <span>linkedin.com/in/malcomchege</span>
-                </div>
-                <div class="contact-item">
-                    <span class="icon">📱</span>
-                    <span>+254 123 456 789</span>
+
+                <div class="work-card">
+                    <h3>Kenya Awaits</h3>
+                    <h4>CEO</h4>
+                    <p>
+                        Kenya Awaits serves as a strategic partner for international businesses seeking to source and import high-quality products from Kenya. We facilitate seamless procurement, logistics, and compliance processes, specializing in agricultural goods like flowers, fruits, and maize flour, effectively bridging the gap between Kenyan producers and the global market. Our expertise ensures reliable and efficient trade connections.
+                    </p>
+                    <!-- Add link if available -->
+                    <!-- <a href="#" target="_blank" rel="noopener noreferrer">Website (if applicable)</a> -->
                 </div>
             </div>
         </section>
+        
+        <!-- Removed About, Skills, and Contact sections -->
+
     </div>
     
     <script>
@@ -211,17 +226,28 @@
         document.addEventListener('DOMContentLoaded', () => {
             const leftPanel = document.querySelector('.left-panel');
             const rightPanel = document.querySelector('.right-panel');
+            const introOverlay = document.querySelector('.intro-overlay');
+
+            // Ensure elements exist before proceeding
+            if (!leftPanel || !rightPanel || !introOverlay) {
+                console.error("Intro animation elements not found!");
+                if (introOverlay) introOverlay.style.display = 'none';
+                return;
+            }
             
-            // Start animation after 2.5 seconds
+            // Start animation sequence after the desired delay (e.g., 0.8 seconds)
             setTimeout(() => {
+                // 1. Slide panels apart
                 leftPanel.classList.add('slide-left');
                 rightPanel.classList.add('slide-right');
-                
-                // Optionally remove the overlay from DOM when animation completes
+
+                // 2. Hide the overlay after the slide animation completes (1.2s)
                 setTimeout(() => {
-                    document.querySelector('.intro-overlay').style.display = 'none';
-                }, 2200);
-            }, 1000);
+                    introOverlay.style.display = 'none';
+                }, 1200); // Match panel transition duration
+
+            }, 800); // Wait 0.8 seconds before starting the slide
+
         });
     </script>
 </body>
