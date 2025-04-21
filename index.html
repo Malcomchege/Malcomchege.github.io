@@ -247,6 +247,66 @@
             text-decoration: underline;
         }
         
+        /* Email section styles */
+        .email-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .email {
+            font-size: 1.1rem;
+            color: #cccccc;
+        }
+        
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #7851A9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background-color: rgba(120, 81, 169, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Copy tooltip */
+        .copy-tooltip {
+            position: absolute;
+            background-color: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            transform: translateY(-100%);
+            margin-top: -8px;
+        }
+        
+        .copy-tooltip.show {
+            opacity: 1;
+        }
+        
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .panel-content {
@@ -282,6 +342,16 @@
             <a href="https://www.instagram.com/malcomchege/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
                 <h1 style=" font-weight: bold;">Malcom Chege</h1>
             </a>
+            <div class="email-section">
+                <span class="email">karloschege@gmail.com</span>
+                <button class="copy-btn" aria-label="Copy email" onclick="copyEmail()" title="Copy email">
+                    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    </svg>
+                    <span class="copy-tooltip">Copied!</span>
+                </button>
+            </div>
         </header>
         
         <section>
@@ -420,6 +490,22 @@
             resizeTimeout = setTimeout(equalizeCardHeights, 150);
         });
 
+        // Email copy functionality
+        function copyEmail() {
+            const email = "karloschege@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const tooltip = document.querySelector('.copy-tooltip');
+                tooltip.classList.add('show');
+                
+                // Hide the tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
     </script>
 </body>
 </html>
+``` 
