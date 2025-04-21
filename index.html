@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malcom Chege | Portfolio</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         /* Global Styles */
         * {
@@ -117,7 +118,30 @@
             font-size: 3rem;
             font-weight: 300;
             margin-bottom: 10px;
-            color: #ffffff; /* Brighter white for main heading */
+            color: #ffffff; /* Default color when not hovering */
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Text-only shimmer effect */
+        h1:hover {
+            background: linear-gradient(
+                to right,
+                #ffffff, /* Start with white */
+                #7851A9, /* Then transition to purple */
+                #ffffff  /* And back to white */
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 1.5s linear infinite;
+        }
+        
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
         }
         
         section {
@@ -256,7 +280,7 @@
     <div class="main-container">
         <header>
             <a href="https://www.instagram.com/malcomchege/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-                <h1>Malcom Chege</h1>
+                <h1 style=" font-weight: bold;">Malcom Chege</h1>
             </a>
         </header>
         
