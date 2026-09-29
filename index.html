@@ -191,6 +191,18 @@
             color: #aaaaaa;
         }
 
+        .work-card h3.has-status {
+            display: flex;
+            align-items: center;
+        }
+
+        .work-card h3.has-status .defunct-indicator {
+            margin-left: auto;
+            padding-left: 8px;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
         .defunct-indicator svg {
             width: 14px;
             height: 14px;
@@ -372,10 +384,10 @@
 
                 <div class="work-card">
                     <div class="card-content">
-                        <h3>
+                        <h3 class="has-status">
                             <img src="kenyaawaits-logo.svg" alt="Kenya Awaits Logo" style="height: 1.4rem; vertical-align: middle; margin-right: 8px;">
                             Kenya Awaits
-                            <span class="defunct-indicator" style="margin-left: 10px; margin-top: 0; font-size: 0.85rem; vertical-align: middle;">
+                            <span class="defunct-indicator" style="margin-top: 0; font-size: 0.85rem;">
                                 🪦 Shutdown: 18-Apr-2026
                             </span>
                         </h3>
@@ -389,10 +401,10 @@
                 
                 <div class="work-card">
                     <div class="card-content">
-                        <h3>
+                        <h3 class="has-status">
                             <img src="lopeve-logo.svg" alt="Lopeve Logo" style="height: 1.4rem; vertical-align: middle; margin-right: 8px;">
                             Lopeve
-                            <span class="defunct-indicator" style="margin-left: 10px; margin-top: 0; font-size: 0.85rem; vertical-align: middle;">
+                            <span class="defunct-indicator" style="margin-top: 0; font-size: 0.85rem;">
                                 🪦 Shutdown: 22-Feb-2024
                             </span>
                         </h3>
